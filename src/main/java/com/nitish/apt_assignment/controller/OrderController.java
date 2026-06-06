@@ -1,5 +1,6 @@
 package com.nitish.apt_assignment.controller;
 
+import com.nitish.apt_assignment.controller.doc.OrderControllerDoc;
 import com.nitish.apt_assignment.dto.request.OrderCreateRequest;
 import com.nitish.apt_assignment.dto.request.OrderUpdateRequest;
 import com.nitish.apt_assignment.dto.response.ApiResponse;
@@ -16,7 +17,7 @@ import static org.springframework.http.MediaType.*;
 
 @RestController
 @RequestMapping(path = "/api/v1/orders")
-public class OrderController {
+public class OrderController implements OrderControllerDoc {
 
     private final OrderService orderService;
 
@@ -25,6 +26,7 @@ public class OrderController {
     }
 
     @PostMapping(consumes = APPLICATION_JSON_VALUE, produces = APPLICATION_JSON_VALUE)
+    @Override
     public ResponseEntity<ApiResponse<OrderResponse>> createOrder(@Valid @RequestBody OrderCreateRequest request){
         var response = orderService.createOrder(request);
 
@@ -32,6 +34,7 @@ public class OrderController {
     }
 
     @GetMapping(path = "/{orderId}", produces = APPLICATION_JSON_VALUE)
+    @Override
     public ResponseEntity<ApiResponse<OrderResponse>> getOrder(@PathVariable UUID orderId){
         var response = orderService.getOrder(orderId);
 
@@ -39,6 +42,7 @@ public class OrderController {
     }
 
     @PatchMapping(path = "/{orderId}", consumes = APPLICATION_JSON_VALUE, produces = APPLICATION_JSON_VALUE)
+    @Override
     public ResponseEntity<ApiResponse<OrderResponse>> updateOrder(@PathVariable UUID orderId, @RequestBody OrderUpdateRequest request){
         var response = orderService.updateOrder(orderId, request);
 
@@ -46,6 +50,7 @@ public class OrderController {
     }
 
     @DeleteMapping(path = "/{orderId}")
+    @Override
     public ResponseEntity<ApiResponse<Void>> deleteOrder(@PathVariable UUID orderId){
         orderService.deleteOrder(orderId);
 
