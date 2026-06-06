@@ -5,6 +5,7 @@ import com.nitish.apt_assignment.dto.request.OrderUpdateRequest;
 import com.nitish.apt_assignment.dto.response.ApiResponse;
 import com.nitish.apt_assignment.dto.response.OrderResponse;
 import com.nitish.apt_assignment.service.OrderService;
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -24,7 +25,7 @@ public class OrderController {
     }
 
     @PostMapping(consumes = APPLICATION_JSON_VALUE, produces = APPLICATION_JSON_VALUE)
-    public ResponseEntity<ApiResponse<OrderResponse>> createOrder(@RequestBody OrderCreateRequest request){
+    public ResponseEntity<ApiResponse<OrderResponse>> createOrder(@Valid @RequestBody OrderCreateRequest request){
         var response = orderService.createOrder(request);
 
         return ResponseEntity.status(HttpStatus.CREATED).body(ApiResponse.success(response, "Order created"));
