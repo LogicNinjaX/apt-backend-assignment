@@ -40,7 +40,7 @@ public class OrderServiceImpl implements OrderService {
 
         logger.info("Order details saved successfully [order id={}]", order.getOrderId());
         OrderResponse response = orderMapper.toResponse(order);
-        notificationService.sendOrderUpdate(new NotificationResponse<>("New order created", response));
+        notificationService.sendOrderUpdate(new NotificationResponse<>("Order Created", response));
         return response;
     }
 
@@ -75,7 +75,7 @@ public class OrderServiceImpl implements OrderService {
 
         logger.info("Order details updated successfully [order id={}]", orderId);
         OrderResponse response = orderMapper.toResponse(order);
-        notificationService.sendOrderUpdate(new NotificationResponse<>("Order details updated successfully", response));
+        notificationService.sendOrderUpdate(new NotificationResponse<>("Order Updated", response));
         return response;
     }
 
@@ -88,7 +88,7 @@ public class OrderServiceImpl implements OrderService {
         orderRepository.delete(order);
         logger.info("Order deleted successfully [order id={}]", orderId);
         notificationService
-                .sendOrderUpdate(new NotificationResponse<>("Order record deleted", orderMapper.toResponse(order)));
+                .sendOrderUpdate(new NotificationResponse<>("Order Deleted", orderMapper.toResponse(order)));
     }
 
 }
