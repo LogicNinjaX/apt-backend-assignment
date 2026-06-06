@@ -1,12 +1,33 @@
 package com.nitish.apt_assignment.dto.response;
 
+import io.swagger.v3.oas.annotations.media.Schema;
+
 import java.time.LocalDateTime;
 
+@Schema(description = "Standard success response")
 public class ApiResponse<T> {
 
+    @Schema(
+            description = "Indicates whether the request was successful",
+            example = "true"
+    )
     private final boolean success;
+
+    @Schema(
+            description = "Response message",
+            example = "Order created successfully"
+    )
     private final String message;
+
+    @Schema(
+            description = "Response payload"
+    )
     private final T data;
+
+    @Schema(
+            description = "Response timestamp",
+            example = "2026-06-06T20:30:45"
+    )
     private final LocalDateTime timeStamp;
 
     ApiResponse(Builder<T> builder){
